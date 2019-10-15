@@ -4,23 +4,33 @@ namespace PolyDb
 {
     public abstract class DbConnection
     {
-        //properties
-        //ConnectionString : string
-        //Timeout : TimeSpan
+        private string ConnectionString;
+        private TimeSpan Timeout;
 
-        //DbConnection(ConnectionString )
-        //{
-        //    ConnectionString = " ";
-        //}
+        public DbConnection()
+        {
+            ConnectionString = " ";
+        }
 
         public abstract void Opening();
+        public abstract void Closing();
     }
 
     public class SqlConnection : DbConnection
     {
+        public SqlConnection() : base()
+        {
+
+        }
+
         public override void Opening()
         {
             Console.WriteLine("Opening SQL Database");
+        }
+
+        public override void Closing()
+        {
+            Console.WriteLine("Closing SQL Database");
         }
     }
 
@@ -34,8 +44,8 @@ namespace PolyDb
             string stringTest = "abc";
             Console.WriteLine(stringTest);
 
-            var db = new SqlConnection();
-            db.Opening();
+            var sql = new SqlConnection();
+            sql.Opening();
         }
     }
 }
